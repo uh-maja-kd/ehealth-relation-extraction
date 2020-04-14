@@ -46,6 +46,11 @@ class BertRelationExtractionDataset(torch.utils.data.Dataset):
 
         return (sents, starts_1, starts_2), batch_output
 
+    def __iter__(self):
+        idxs = list(range(len(self)))
+        for i in idxs:
+            yield self[i]
+
     def build_batch(self, sentence):
         for kp1 in sentence.keyphrases:
             for kp2 in sentence.keyphrases:
