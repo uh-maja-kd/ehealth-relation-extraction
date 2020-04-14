@@ -1,4 +1,4 @@
-import torch
+import torch, random
 from utils import to_categorical, build_bert_tokenizer
 
 # pylint: disable=no-member, not-callable
@@ -48,6 +48,7 @@ class BertRelationExtractionDataset(torch.utils.data.Dataset):
 
     def __iter__(self):
         idxs = list(range(len(self)))
+        random.shuffle(idxs)
         for i in idxs:
             yield self[i]
 
