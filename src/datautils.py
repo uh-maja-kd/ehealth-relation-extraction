@@ -93,9 +93,9 @@ class BertRelationExtractionDataset(torch.utils.data.Dataset):
 
     def build_output(self, sentence, kp1, kp2):
         relations = [rel.label for rel in sentence.find_relations(kp1, kp2)]
-        output = [0] * len(RELATIONS)
+        output = [0.0] * len(RELATIONS)
         for i, rel in enumerate(RELATIONS):
             if rel in relations:
-                output[i] = 1
+                output[i] = 1.0
         return output
 
