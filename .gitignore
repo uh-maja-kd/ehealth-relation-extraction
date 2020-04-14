@@ -114,6 +114,6 @@ dmypy.json
 .ipynb_checkpoints
 
 # Main notebook to run in colab
-main.ipynb
+*.ipynb
 
 # End of https://www.gitignore.io/api/code,python
