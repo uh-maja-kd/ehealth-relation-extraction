@@ -1,13 +1,16 @@
 import torch
-from utils import build_bert_model, build_bert_tokenizer
+from utils import build_bert_model, build_bert_tokenizer, disable_grads
 
 # pylint: disable=no-member
 
 
 class BertRelationExtraction(torch.nn.Module):
-    def __init__(self, relations_count):
+    def __init__(self, relations_count, fine_tune=True):
         torch.nn.Module.__init__(self)
         self.bert_model = build_bert_model()
+        if not fine_tune:
+            disable_grads(self.bert_model)
+
         self.linear = torch.nn.Linear(
             self.bert_model.config.hidden_size * 2, relations_count
         )

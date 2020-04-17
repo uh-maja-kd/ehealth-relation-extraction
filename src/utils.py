@@ -12,6 +12,11 @@ def to_categorical(x, num_classes):
     return categorical
 
 
+def disable_grads(model):
+    for parameter in model.parameters():
+        parameter.requires_grad = False
+
+
 def build_bert_tokenizer():
     bert_tokenizer = BertTokenizer.from_pretrained("bert-base-multilingual-cased")
     bert_tokenizer.add_special_tokens(
@@ -25,7 +30,7 @@ def build_bert_model_builder():
     bert_tokenizer = build_bert_tokenizer()
     vocab_size = len(bert_tokenizer)
 
-    def build_bert_model() -> BertModel:
+    def build_bert_model():
         bert_model = BertModel.from_pretrained("bert-base-multilingual-cased")
         bert_model.tie_weights()  # don't know what this is for
         bert_model.resize_token_embeddings(vocab_size)
